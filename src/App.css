@@ -1,0 +1,37 @@
+/* src/App.css */
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.map-container {
+  flex: 2;
+  height: 100%;
+}
+
+.party-list-container {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f4f4f4;
+}
+
+.party-list {
+  padding: 20px;
+}
+
+.party-list h2 {
+  margin-top: 0;
+}
+
+.party-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.party-list li {
+  margin-bottom: 15px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

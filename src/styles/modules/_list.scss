@@ -1,0 +1,29 @@
+/* src/styles/modules/_list.scss */
+@import "../theme/colors";
+
+.party-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 40%;
+  /* Adjust height relative to the map */
+  width: 100%;
+  overflow-y: auto;
+  /* Add scrolling for the list */
+  background-color: $primary-bg;
+}
+
+.party-list-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid $secondary-bg;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: lighten($primary-bg, 10%);
+  }
+
+  &.selected {
+    background-color: lighten($primary-bg, 20%);
+  }
+}
