@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import EventMap from './components/EventMap';  // Corrected path
+import PartyList from './components/PartyList';  // Corrected path
+import PartyDetails from './pages/PartyDetails';  // Corrected path
+import Profile from './pages/Profile';  // Corrected path
+import Settings from './pages/Settings';  // Corrected path
+import './styles/layout/_layout.scss';  // Corrected path
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app-container">
+        <div className="phone-frame">
+          <div className="map-container">
+            <EventMap />
+          </div>
+        </div>
+        <div className="list-container">
+          <PartyList selectedEvent={null} /> {/* Added selectedEvent prop */}
+        </div>
+      </div>
+
+      <Routes>
+        <Route path="/details/:id" element={<PartyDetails />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,16 @@
+@import '../theme/_colors.scss';
+
+.party-list {
+  padding: 10px;
+}
+
+.party-item {
+  padding: 10px;
+  border-bottom: 1px solid $secondary-bg;
+  cursor: pointer;
+  background-color: $primary-bg;
+
+  &.highlighted {
+    background-color: $highlight-color;
+  }
+}

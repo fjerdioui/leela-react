@@ -1,0 +1,24 @@
+@import '../theme/_colors.scss';
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  background-color: $primary-bg;
+}
+
+.phone-frame {
+  flex: 0 0 35%;
+  border: 2px solid $secondary-bg;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.map-container {
+  height: 100%;
+}
+
+.list-container {
+  flex: 1;
+  overflow-y: auto;
+  background-color: $secondary-bg;
+}
