@@ -1,16 +1,19 @@
 @import '../theme/_colors.scss';
 
 .party-list {
-  padding: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .party-item {
   padding: 10px;
-  border-bottom: 1px solid $secondary-bg;
+  border-bottom: 1px solid #ccc;
   cursor: pointer;
-  background-color: $primary-bg;
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
 
-  &.highlighted {
-    background-color: $highlight-color;
-  }
+.party-item:hover {
+  background-color: #f0f0f0;  // Add a hover effect to show it's clickable
 }

@@ -30,4 +30,4 @@ const mockEvents = [
 //   language: "English",
 // };
 
-export default mockData;
+export default mockEvents;
