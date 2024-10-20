@@ -8,23 +8,24 @@ interface PartyListProps {
 }
 
 const PartyList: React.FC<PartyListProps> = ({ selectedPartyId, onPartySelect }) => {
-  const listRef = useRef<HTMLUListElement | null>(null);
+  const listItemRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
 
+  // Scroll the selected party into view whenever it's selected
   useEffect(() => {
-    if (selectedPartyId && listRef.current) {
-      const selectedElement = document.getElementById(`party-item-${selectedPartyId}`);
-      if (selectedElement) {
-        selectedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+    if (selectedPartyId && listItemRefs.current[selectedPartyId]) {
+      listItemRefs.current[selectedPartyId]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
     }
   }, [selectedPartyId]);
 
   return (
-    <ul ref={listRef} className="party-list">
+    <ul className="party-list">
       {mockEvents.map((event: Event) => (
         <li
           key={event.id}
-          id={`party-item-${event.id}`} // Assign a unique ID for scrolling
+          ref={el => (listItemRefs.current[event.id] = el)} // Store reference to each list item
           onClick={() => onPartySelect(event.id)}
           className={`party-item ${selectedPartyId === event.id ? 'highlighted' : ''}`}
         >
