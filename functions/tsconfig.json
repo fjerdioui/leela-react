@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es2015",  // Target ECMAScript 2015 (ES6) for modern JS features
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,  // Skip type checks for libraries in node_modules
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "commonjs",  // Set to commonjs for Node.js compatibility
+    "moduleResolution": "node",
+    "resolveJsonModule": true,  // Allows importing JSON files
+    "isolatedModules": true,
+    "noEmit": false,  // Ensure TypeScript emits JS files
+    "outDir": "./dist",  // Output compiled JS files to the 'dist' folder
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/**/*.ts",  // Include TypeScript files in the src folder
+    "*.ts"  // Include TypeScript files at the root level, if any
+  ],
+  "exclude": [
+    "node_modules"  // Exclude node_modules from compilation
+  ]
+}
