@@ -1,10 +1,10 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./leela-b1fe9-firebase-adminsdk-6pdtm-3f1da12c6b.json');  // Adjust the path as necessary
+const serviceAccount = require('./leela-b1fe9-firebase-adminsdk-6pdtm-3f1da12c6b.json'); // Adjust the path as necessary
 const data = require('./Events.json');
 
 // Initialize Firebase Admin SDK
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 });
 
 const db = admin.firestore();

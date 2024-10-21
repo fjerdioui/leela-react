@@ -10,4 +10,5 @@ export interface Event {
   };
   description: string;
   ticketLink: string;
+  source: string;
 }

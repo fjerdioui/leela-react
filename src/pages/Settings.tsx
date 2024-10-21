@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Settings: React.FC = () => {
   const [settings, setSettings] = useState({

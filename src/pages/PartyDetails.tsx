@@ -1,10 +1,10 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import mockEvents from '../mockData';
+import React from "react";
+import { useParams } from "react-router-dom";
+import mockEvents from "../mockData";
 
 const PartyDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const event = mockEvents.find(event => event.id === id);
+  const event = mockEvents.find((event) => event.id === id);
 
   return (
     <div>

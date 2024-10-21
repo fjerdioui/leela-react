@@ -1,4 +1,4 @@
-@import '../theme/_colors.scss';
+@import "../theme/_colors.scss";
 
 .party-list {
   list-style: none;
@@ -15,7 +15,9 @@
   border-radius: 8px;
   background-color: #ffffff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
   cursor: pointer;
 }
 

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useNavigate  } from 'react-router-dom';
-import profileIcon from '../assets/profile-icon.png';
-import settingsIcon from '../assets/settings-icon.png';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import profileIcon from "../assets/profile-icon.png";
+import settingsIcon from "../assets/settings-icon.png";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -13,13 +13,13 @@ const Header: React.FC = () => {
           src={profileIcon}
           alt="Profile"
           className="header-icon"
-          onClick={() => navigate('/profile')}
+          onClick={() => navigate("/profile")}
         />
         <img
           src={settingsIcon}
           alt="Settings"
           className="header-icon"
-          onClick={() => navigate('/settings')}
+          onClick={() => navigate("/settings")}
         />
       </div>
     </header>

@@ -7,7 +7,7 @@ const mockEvents = [
     price: 20,
     location: { lat: 51.5113, lon: -0.1233 },
     description: "A fun pop music party in the heart of London.",
-    ticketLink: "https://example.com/party1-tickets"
+    ticketLink: "https://example.com/party1-tickets",
   },
   {
     id: "2",
@@ -17,7 +17,7 @@ const mockEvents = [
     price: 25,
     location: { lat: 51.527, lon: -0.078 },
     description: "House music extravaganza in Shoreditch.",
-    ticketLink: "https://example.com/party2-tickets"
+    ticketLink: "https://example.com/party2-tickets",
   },
   {
     id: "3",
@@ -27,7 +27,7 @@ const mockEvents = [
     price: 18,
     location: { lat: 51.539, lon: -0.142 },
     description: "A rocking party in the vibrant Camden Town.",
-    ticketLink: "https://example.com/party3-tickets"
+    ticketLink: "https://example.com/party3-tickets",
   },
   {
     id: "4",
@@ -37,7 +37,7 @@ const mockEvents = [
     price: 22,
     location: { lat: 51.463, lon: -0.1145 },
     description: "Reggae vibes and a chill night in Brixton.",
-    ticketLink: "https://example.com/party4-tickets"
+    ticketLink: "https://example.com/party4-tickets",
   },
   {
     id: "5",
@@ -47,7 +47,7 @@ const mockEvents = [
     price: 30,
     location: { lat: 51.5096, lon: -0.206 },
     description: "Smooth jazz night in Notting Hill.",
-    ticketLink: "https://example.com/party5-tickets"
+    ticketLink: "https://example.com/party5-tickets",
   },
   {
     id: "6",
@@ -57,7 +57,7 @@ const mockEvents = [
     price: 35,
     location: { lat: 51.482, lon: -0.005 },
     description: "A high-energy electronic music party in Greenwich.",
-    ticketLink: "https://example.com/party6-tickets"
+    ticketLink: "https://example.com/party6-tickets",
   },
   {
     id: "7",
@@ -67,7 +67,7 @@ const mockEvents = [
     price: 15,
     location: { lat: 51.461, lon: -0.138 },
     description: "Hip-Hop beats in Clapham all night long.",
-    ticketLink: "https://example.com/party7-tickets"
+    ticketLink: "https://example.com/party7-tickets",
   },
   {
     id: "8",
@@ -77,7 +77,7 @@ const mockEvents = [
     price: 40,
     location: { lat: 51.487, lon: -0.168 },
     description: "A night of classical music in Chelsea.",
-    ticketLink: "https://example.com/party8-tickets"
+    ticketLink: "https://example.com/party8-tickets",
   },
   {
     id: "9",
@@ -87,7 +87,7 @@ const mockEvents = [
     price: 28,
     location: { lat: 51.536, lon: -0.105 },
     description: "An indie music night in Islington.",
-    ticketLink: "https://example.com/party9-tickets"
+    ticketLink: "https://example.com/party9-tickets",
   },
   {
     id: "10",
@@ -97,7 +97,7 @@ const mockEvents = [
     price: 25,
     location: { lat: 51.5145, lon: -0.1314 },
     description: "A groovy disco night in Soho.",
-    ticketLink: "https://example.com/party10-tickets"
+    ticketLink: "https://example.com/party10-tickets",
   },
   {
     id: "11",
@@ -107,7 +107,7 @@ const mockEvents = [
     price: 20,
     location: { lat: 51.546, lon: -0.058 },
     description: "An underground garage music event in Hackney.",
-    ticketLink: "https://example.com/party11-tickets"
+    ticketLink: "https://example.com/party11-tickets",
   },
   {
     id: "12",
@@ -115,9 +115,9 @@ const mockEvents = [
     address: "Kings Cross",
     musicStyle: "Techno",
     price: 30,
-    location: { lat: 51.530, lon: -0.123 },
+    location: { lat: 51.53, lon: -0.123 },
     description: "A night of heavy techno beats in Kings Cross.",
-    ticketLink: "https://example.com/party12-tickets"
+    ticketLink: "https://example.com/party12-tickets",
   },
   {
     id: "13",
@@ -127,7 +127,7 @@ const mockEvents = [
     price: 22,
     location: { lat: 51.421, lon: -0.205 },
     description: "Funky tunes and a dance-filled night in Wimbledon.",
-    ticketLink: "https://example.com/party13-tickets"
+    ticketLink: "https://example.com/party13-tickets",
   },
   {
     id: "14",
@@ -137,7 +137,7 @@ const mockEvents = [
     price: 35,
     location: { lat: 51.555, lon: -0.176 },
     description: "A blues night in the peaceful Hampstead area.",
-    ticketLink: "https://example.com/party14-tickets"
+    ticketLink: "https://example.com/party14-tickets",
   },
   {
     id: "15",
@@ -147,7 +147,7 @@ const mockEvents = [
     price: 25,
     location: { lat: 51.491, lon: -0.256 },
     description: "A soulful evening in Chiswick.",
-    ticketLink: "https://example.com/party15-tickets"
+    ticketLink: "https://example.com/party15-tickets",
   },
   {
     id: "16",
@@ -157,7 +157,7 @@ const mockEvents = [
     price: 27,
     location: { lat: 51.481, lon: -0.195 },
     description: "Drum & Bass vibes all night in Fulham.",
-    ticketLink: "https://example.com/party16-tickets"
+    ticketLink: "https://example.com/party16-tickets",
   },
   {
     id: "17",
@@ -167,7 +167,7 @@ const mockEvents = [
     price: 18,
     location: { lat: 51.461, lon: -0.304 },
     description: "A country music night in Richmond.",
-    ticketLink: "https://example.com/party17-tickets"
+    ticketLink: "https://example.com/party17-tickets",
   },
   {
     id: "18",
@@ -177,7 +177,7 @@ const mockEvents = [
     price: 40,
     location: { lat: 51.501, lon: -0.124 },
     description: "A smooth jazz evening in Westminster.",
-    ticketLink: "https://example.com/party18-tickets"
+    ticketLink: "https://example.com/party18-tickets",
   },
   {
     id: "19",
@@ -187,7 +187,7 @@ const mockEvents = [
     price: 16,
     location: { lat: 51.503, lon: -0.091 },
     description: "A cozy folk music night in Southwark.",
-    ticketLink: "https://example.com/party19-tickets"
+    ticketLink: "https://example.com/party19-tickets",
   },
   {
     id: "20",
@@ -197,8 +197,8 @@ const mockEvents = [
     price: 50,
     location: { lat: 51.499, lon: -0.193 },
     description: "A night of operatic performances in Kensington.",
-    ticketLink: "https://example.com/party20-tickets"
-  }
+    ticketLink: "https://example.com/party20-tickets",
+  },
 ];
 
 // Mock data for settings
