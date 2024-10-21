@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import mockEvents from '../mockData';
+import React, { useEffect, useRef, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 import { Event } from '../types';
 
 interface PartyListProps {
@@ -8,9 +9,26 @@ interface PartyListProps {
 }
 
 const PartyList: React.FC<PartyListProps> = ({ selectedPartyId, onPartySelect }) => {
+  const [events, setEvents] = useState<Event[]>([]);
   const listItemRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
 
-  // Scroll the selected party into view whenever it's selected
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'events'));
+        const eventsList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        } as Event));
+        setEvents(eventsList);
+      } catch (error) {
+        console.error("Error fetching events: ", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   useEffect(() => {
     if (selectedPartyId && listItemRefs.current[selectedPartyId]) {
       listItemRefs.current[selectedPartyId]?.scrollIntoView({
@@ -22,10 +40,10 @@ const PartyList: React.FC<PartyListProps> = ({ selectedPartyId, onPartySelect })
 
   return (
     <ul className="party-list">
-      {mockEvents.map((event: Event) => (
+      {events.map((event: Event) => (
         <li
           key={event.id}
-          ref={el => (listItemRefs.current[event.id] = el)} // Store reference to each list item
+          ref={el => (listItemRefs.current[event.id] = el)}
           onClick={() => onPartySelect(event.id)}
           className={`party-item ${selectedPartyId === event.id ? 'highlighted' : ''}`}
         >

@@ -1,6 +1,7 @@
 import React from 'react';
 import EventMap from './EventMap';
 import PartyList from './PartyList';
+import { Event } from '../types';
 
 interface MapWithListProps {
   selectedPartyId: string | null;
