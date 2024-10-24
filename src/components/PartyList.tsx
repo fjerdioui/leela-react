@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebaseConfig";
 import { Event } from "../types";
 
 interface PartyListProps {
@@ -16,16 +14,11 @@ const PartyList: React.FC<PartyListProps> = ({
   const listItemRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
 
   useEffect(() => {
+    // Fetch events from your backend API connected to MongoDB
     const fetchEvents = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "events"));
-        const eventsList = querySnapshot.docs.map(
-          (doc) =>
-            ({
-              id: doc.id,
-              ...doc.data(),
-            }) as Event,
-        );
+        const response = await fetch('/api/getEvents'); // Adjust this endpoint if necessary
+        const eventsList = await response.json();
         setEvents(eventsList);
       } catch (error) {
         console.error("Error fetching events: ", error);

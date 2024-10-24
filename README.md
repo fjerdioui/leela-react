@@ -48,3 +48,28 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 nb$wcxPfAg6X-76
+
+
+EventTribeAPI
+
+API key
+FZDMFSKXESTXXA5FTW
+Client secret
+3UTGZINTLWSZHXGVRJUKOAKSVEN76GOYLJLH5FSXRDVBWAE4OM
+Private token
+SOY4CAI2YIE6QFKKHJRC
+Public token
+5US4B6PAK6DZS5D5K3VJ
+
+
+
+ticket master 
+Consumer Key	383AoSTTb8Kmip3VQz3PBoCPoDkQdlVG
+Consumer Secret	t0uGSrLDxPr0iiDZ
+
+
+FB API
+App ID
+876572344585532
+App secret
+f0f88458b6ea91b460baf2a095e84d69

@@ -1,20 +1,53 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES6", // Upgraded target to ES6 for better modern JS support
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "noImplicitAny": true, // Enforce explicit typing
+    "strictNullChecks": true, // Strict null checks for better type safety
+    "strictFunctionTypes": true, // Enable strict function type checks
+    "strictBindCallApply": true, // Strict bind, call, and apply methods
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src", // Base URL for path mappings
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ], // Mapping for components
+      "@pages/*": [
+        "pages/*"
+      ], // Mapping for pages
+      "@assets/*": [
+        "assets/*"
+      ], // Mapping for assets
+      "@styles/*": [
+        "styles/*"
+      ], // Mapping for styles
+      "@types/*": [
+        "types/*"
+      ] // Mapping for types
+    }
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist"
+  ] // Exclude build and node_modules folders
 }
