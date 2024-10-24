@@ -1,14 +1,29 @@
-import React from 'react';
-import profileIcon from '../assets/profile-icon.png';
-import settingsIcon from '../assets/settings-icon.png';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import profileIcon from "../assets/profile-icon.png";
+import settingsIcon from "../assets/settings-icon.png";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="header">
-      <img src={profileIcon} alt="Profile" className="icon" />
-      <img src={settingsIcon} alt="Settings" className="icon" />
-    </div>
+    <header className="app-header">
+      <div className="header-icons">
+        <img
+          src={profileIcon}
+          alt="Profile"
+          className="header-icon"
+          onClick={() => navigate("/profile")}
+        />
+        <img
+          src={settingsIcon}
+          alt="Settings"
+          className="header-icon"
+          onClick={() => navigate("/settings")}
+        />
+      </div>
+    </header>
   );
 };
 
-export default Header; // Ensure there is an export statement
+export default Header;
