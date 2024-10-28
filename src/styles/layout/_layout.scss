@@ -1,3 +1,5 @@
+// src/styles/layout/_layout.scss
+
 @import "../theme/colors"; // Import your theme colors
 
 .app-main-container {
@@ -9,11 +11,10 @@
   background-color: $primary-bg;
 }
 
-/* Container for the phone frame and list */
+/* Phone frame and list container layout */
 .phone-and-list-container {
   display: flex;
   width: 85%;
-  // max-width: 1400px;
   height: 90vh;
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
@@ -27,11 +28,9 @@
   display: flex;
   justify-content: flex-end;
   padding: 5px 10px;
-  /* Reduce padding */
   background-color: #f8f8f8;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 50px;
-  /* Make the header smaller */
 }
 
 .header-icons {
@@ -41,7 +40,6 @@
 
 .header-icon {
   width: 24px;
-  /* Reduce icon size */
   height: 24px;
   cursor: pointer;
   margin-left: 10px;
@@ -52,125 +50,54 @@
   transform: scale(1.1);
 }
 
-/* Ensure the overall container has only one scrollbar */
-.app-container {
-  display: flex;
-  height: 100vh;
-  overflow-y: auto;
-  /* Only one scrollbar for the entire page */
-  background-color: $primary-bg;
-}
-
-/* Phone frame for design */
+/* Phone frame holding the map */
 .phone-frame {
-  // width: 50%; /* The phone frame takes 35% of the width */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: 2;
   height: calc(90vh - 50px);
-  /* Adjust height to account for the header */
   background-color: #f5f5f5;
   border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
   padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
 }
 
 .map-container {
   width: 100%;
-  /* Make sure the map fits the phone width */
   height: 100%;
   border-radius: 25px;
+  overflow: hidden;
 }
 
-/* List container positioned outside of the phone frame */
+/* List container positioned to the right of the phone frame */
 .list-container {
   flex: 1;
-  /* Fills the remaining width on the right side */
   overflow-y: scroll;
-  height: calc(96vh - 50px);
-  /* Adjust height to account for the header */
+  height: calc(90vh - 50px);
   background-color: lightgray;
   padding: 0;
-  width: 110vh;
   border-radius: 20px;
+  margin-left: 20px;
 
   /* Style the scrollbar for WebKit-based browsers */
   ::-webkit-scrollbar {
     width: 8px;
-    /* Thin scrollbar */
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.3);
-    /* Dark thumb for modern look */
     border-radius: 10px;
-    /* Rounded edges */
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.5);
-    /* Slightly darker on hover */
   }
 
   ::-webkit-scrollbar-track {
     background-color: #f1f1f1;
-    /* Light track background */
   }
 
   /* Style the scrollbar for Firefox */
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.3) #f1f1f1;
-}
-
-/* Party list styles */
-.party-list {
-  list-style: none;
-  padding: 0;
-  margin: 2%;
-}
-
-.party-item {
-  background-color: #ffffff;
-  padding: 15px;
-  border-radius: 12px;
-  margin: 15px 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-  cursor: pointer;
-}
-
-.party-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.party-item.highlighted {
-  border-left: 5px solid #ffc107;
-}
-
-.party-item-name {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.party-item-info,
-.party-item-description {
-  margin: 5px 0;
-  font-size: 14px;
-  color: #666;
-}
-
-.party-item-link {
-  font-size: 14px;
-  color: $primary-color;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.party-item-link:hover {
-  text-decoration: underline;
 }

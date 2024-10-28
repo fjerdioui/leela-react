@@ -1,32 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+// src/components/PartyList.tsx
+import React, { useEffect, useRef } from "react";
 import { Event } from "../types";
 
 interface PartyListProps {
+  events: Event[];
   selectedPartyId: string | null;
   onPartySelect: (id: string) => void;
 }
 
-const PartyList: React.FC<PartyListProps> = ({
-  selectedPartyId,
-  onPartySelect,
-}) => {
-  const [events, setEvents] = useState<Event[]>([]);
+const PartyList: React.FC<PartyListProps> = ({ events, selectedPartyId, onPartySelect }) => {
   const listItemRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
-
-  useEffect(() => {
-    // Fetch events from your backend API connected to MongoDB
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch('/api/getEvents'); // Adjust this endpoint if necessary
-        const eventsList = await response.json();
-        setEvents(eventsList);
-      } catch (error) {
-        console.error("Error fetching events: ", error);
-      }
-    };
-
-    fetchEvents();
-  }, []);
 
   useEffect(() => {
     if (selectedPartyId && listItemRefs.current[selectedPartyId]) {
@@ -41,10 +24,10 @@ const PartyList: React.FC<PartyListProps> = ({
     <ul className="party-list">
       {events.map((event: Event) => (
         <li
-          key={event.id}
-          ref={(el) => (listItemRefs.current[event.id] = el)}
-          onClick={() => onPartySelect(event.id)}
-          className={`party-item ${selectedPartyId === event.id ? "highlighted" : ""}`}
+          key={event._id}
+          ref={(el) => (listItemRefs.current[event._id] = el)}
+          onClick={() => onPartySelect(event._id)}
+          className={`party-item ${selectedPartyId === event._id ? "highlighted" : ""}`}
         >
           <div className="party-item-content">
             <h3 className="party-item-name">{event.name}</h3>
@@ -52,12 +35,7 @@ const PartyList: React.FC<PartyListProps> = ({
               {event.musicStyle} - £{event.price}
             </p>
             <p className="party-item-description">{event.description}</p>
-            <a
-              href={event.ticketLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="party-item-link"
-            >
+            <a href={event.ticketLink} target="_blank" rel="noopener noreferrer" className="party-item-link">
               Buy Tickets
             </a>
           </div>

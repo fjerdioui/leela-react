@@ -1,65 +1,45 @@
-import React, { useEffect, useRef, useState } from "react";
-import L from "leaflet"; // Leaflet for the map
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+// src/components/EventMap.tsx
+import React, { useEffect, useRef } from "react";
+import L from "leaflet";
 import { Event } from "../types";
 import partyIcon from "../assets/party-icon.png";
 
 interface EventMapProps {
+  events: Event[];
   selectedPartyId: string | null;
   onMapClick: (id: string) => void;
 }
 
-const EventMap: React.FC<EventMapProps> = ({ selectedPartyId, onMapClick }) => {
-  const mapRef = useRef<HTMLDivElement | null>(null); // To hold the reference to the map container
-  const leafletMapRef = useRef<L.Map | null>(null); // To hold the Leaflet map instance
-  const markerLayerRef = useRef<L.LayerGroup | null>(null); // Reference for managing marker layers
-  const [events, setEvents] = useState<Event[]>([]); // Use events from Firebase
-  const markerRefs = useRef<{ [key: string]: L.Marker }>({}); // To hold references to markers
+const EventMap: React.FC<EventMapProps> = ({ events, selectedPartyId, onMapClick }) => {
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const leafletMapRef = useRef<L.Map | null>(null);
+  const markerLayerRef = useRef<L.LayerGroup | null>(null);
+  const markerRefs = useRef<{ [key: string]: L.Marker }>({});
 
-  // Fetch events from Firebase
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const snapshot = await db.collection("events").get(); // Firestore Admin SDK method
-        const fetchedEvents: Event[] = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-          location: {
-            lat: doc.data().location._latitude,
-            lon: doc.data().location._longitude,
-          },
-        })) as Event[];
-        setEvents(fetchedEvents);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
-
-    fetchEvents();
-
-    // Initialize the map if not already initialized
     if (!leafletMapRef.current && mapRef.current) {
-      const map = L.map(mapRef.current).setView([51.505, -0.09], 13); // Center on London
-      leafletMapRef.current = map;
+      console.log("Initializing map...");
+      leafletMapRef.current = L.map(mapRef.current).setView([51.505, -0.09], 13);
 
-      // Add tile layer for map background
       L.tileLayer(
+        //   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        //   attribution: '&copy; OpenStreetMap contributors'
+        // }
         "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
         {
-          attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-        },
-      ).addTo(map);
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          maxZoom: 18,
+        }
+      ).addTo(leafletMapRef.current);
 
-      // Initialize the marker layer group
-      markerLayerRef.current = L.layerGroup().addTo(map);
+      markerLayerRef.current = L.layerGroup().addTo(leafletMapRef.current);
     }
   }, []);
 
-  // Add markers when events and map are initialized
   useEffect(() => {
     if (leafletMapRef.current && markerLayerRef.current && events.length > 0) {
-      markerLayerRef.current.clearLayers(); // Clear any existing markers
+      markerLayerRef.current.clearLayers(); // Clear previous markers
+      console.log("Adding markers to map...");
 
       const customIcon = L.icon({
         iconUrl: partyIcon,
@@ -69,70 +49,47 @@ const EventMap: React.FC<EventMapProps> = ({ selectedPartyId, onMapClick }) => {
       });
 
       events.forEach((event: Event) => {
-        // Ensure the event has valid lat/lon values
         if (event.location?.lat && event.location?.lon) {
-          const marker = L.marker([event.location.lat, event.location.lon], {
-            icon: customIcon,
-          }).addTo(markerLayerRef.current as L.LayerGroup);
+          const marker = L.marker([event.location.lat, event.location.lon], { icon: customIcon });
+          marker.addTo(markerLayerRef.current as L.LayerGroup);
+          markerRefs.current[event._id] = marker;
 
-          // Store marker reference for later use (for popup control)
-          markerRefs.current[event.id] = marker;
-
-          // When marker is clicked, trigger the scroll and highlight
           marker.on("click", () => {
-            onMapClick(event.id);
+            console.log(`Marker clicked: ${event.name}`);
+            onMapClick(event._id);
             marker.openPopup();
           });
 
-          // Show popup on marker click
           marker.bindPopup(`
-            <div>
-              <h3>${event.name}</h3>
-              <p><strong>Address:</strong> ${event.address}</p>
-              <p><strong>Music Style:</strong> ${event.musicStyle}</p>
-              <p><strong>Price:</strong> £${event.price}</p>
-              <p><strong>Description:</strong> ${event.description}</p>
-              <a href="${event.ticketLink}" target="_blank">Buy Tickets</a>
-            </div>
+           <div>
+                <h3>${event.name}</h3>
+                <p><strong>Address:</strong> ${event.address}</p>
+                <p><strong>Music Style:</strong> ${event.musicStyle}</p>
+                <p><strong>Price:</strong> £${event.price}</p>
+                <p><strong>Description:</strong> ${event.description}</p>
+                <a href="${event.ticketLink}" target="_blank">Buy Tickets</a>
+           </div>
           `);
         } else {
-          console.error(
-            `Invalid location for event ${event.name}:`,
-            event.location,
-          ); // Log invalid location
+          console.warn(`Event location missing: ${event.name}`);
         }
       });
     }
   }, [events, onMapClick]);
 
-  // Handle highlighting the selected event on the map
   useEffect(() => {
     if (selectedPartyId && leafletMapRef.current) {
-      const selectedEvent = events.find(
-        (event) => event.id === selectedPartyId,
-      );
-      if (
-        selectedEvent &&
-        selectedEvent.location?.lat &&
-        selectedEvent.location?.lon
-      ) {
-        leafletMapRef.current.setView(
-          [selectedEvent.location.lat, selectedEvent.location.lon],
-          11,
-        );
-        markerRefs.current[selectedPartyId].openPopup(); // Show the popup for the selected even
+      const selectedEvent = events.find(event => event._id === selectedPartyId);
+      if (selectedEvent && selectedEvent.location?.lat && selectedEvent.location?.lon) {
+        console.log(`Moving map to selected event: ${selectedEvent.name}`);
+        leafletMapRef.current.setView([selectedEvent.location.lat, selectedEvent.location.lon], 13);
+        const selectedMarker = markerRefs.current[selectedPartyId];
+        selectedMarker?.openPopup();
       }
     }
   }, [selectedPartyId, events]);
 
-  return (
-    <div
-      ref={mapRef}
-      id="map"
-      className="map-container"
-      style={{ height: "100%", width: "100%" }}
-    />
-  );
+  return <div ref={mapRef} id="map" className="map-container" style={{ height: "100%", width: "100%" }} />;
 };
 
 export default EventMap;

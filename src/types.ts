@@ -1,5 +1,6 @@
+// src/types.ts
 export interface Event {
-  id: string;
+  _id: string;
   name: string;
   address: string;
   musicStyle: string;
