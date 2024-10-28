@@ -2,13 +2,13 @@
 
 @import "../theme/_colors.scss";
 
-.party-list {
+.event-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.party-item {
+.event-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,39 +23,39 @@
   cursor: pointer;
 }
 
-.party-item:hover {
+.event-item:hover {
   background-color: #f0f0f0;
   transform: translateY(-2px);
 }
 
-.party-item.highlighted {
+.event-item.highlighted {
   background-color: #ffe600;
   border-left: 5px solid #ffc107;
 }
 
-.party-item-name {
+.event-item-name {
   font-weight: bold;
   font-size: 18px;
   color: #333;
 }
 
-.party-item-info {
+.event-item-info {
   color: #777;
   font-size: 14px;
 }
 
-.party-item-description {
+.event-item-description {
   font-size: 14px;
   color: #666;
 }
 
-.party-item-link {
+.event-item-link {
   font-size: 14px;
   color: $primary-color;
   text-decoration: none;
   font-weight: bold;
 }
 
-.party-item-link:hover {
+.event-item-link:hover {
   text-decoration: underline;
 }

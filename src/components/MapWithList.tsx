@@ -1,20 +1,19 @@
 // src/components/MapWithList.tsx
 import React, { useEffect, useState } from "react";
 import EventMap from "./EventMap";
-import PartyList from "./PartyList";
+import EventList from "./EventList";
 import { Event } from "../types";
-// import { mockEvents } from "../mockData"; // Uncomment to switch to mock data
 
 interface MapWithListProps {
-  selectedPartyId: string | null;
-  setSelectedPartyId: (id: string | null) => void;
+  selectedEventId: string | null;
+  setSelectedEventId: (id: string | null) => void;
 }
 
 const MapWithList: React.FC<MapWithListProps> = ({
-  selectedPartyId,
-  setSelectedPartyId,
+  selectedEventId,
+  setSelectedEventId,
 }) => {
-  const [events, setEvents] = useState<Event[]>([]); // Default to empty array
+  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:4000";
@@ -24,10 +23,10 @@ const MapWithList: React.FC<MapWithListProps> = ({
       try {
         const response = await fetch(`${API_BASE_URL}/events`);
         const eventsList = await response.json();
-        setEvents(eventsList); // Set real data
+        setEvents(eventsList);
       } catch (error) {
         console.error("Error fetching events:", error);
-        setEvents([]); // Set to empty if fetch fails
+        setEvents([]);
       } finally {
         setLoading(false);
       }
@@ -37,7 +36,7 @@ const MapWithList: React.FC<MapWithListProps> = ({
   }, [API_BASE_URL]);
 
   const handleMapClick = (id: string) => {
-    setSelectedPartyId(id);
+    setSelectedEventId(id);
   };
 
   if (loading) {
@@ -50,18 +49,19 @@ const MapWithList: React.FC<MapWithListProps> = ({
         {events.length > 0 ? (
           <EventMap
             events={events}
-            selectedPartyId={selectedPartyId}
+            selectedEventId={selectedEventId}
             onMapClick={handleMapClick}
           />
         ) : (
-          <div className="no-events">No events available.</div> // Message if no events
+          <div className="no-events">No events available.</div>
         )}
       </div>
       <div className="list-container">
-        <PartyList
+        <EventList
           events={events}
-          selectedPartyId={selectedPartyId}
-          onPartySelect={setSelectedPartyId}
+          selectedEventId={selectedEventId}
+          onEventSelect={setSelectedEventId}
+          onNameClick={(id: string) => `/eventDetails/${id}`}
         />
       </div>
     </div>
