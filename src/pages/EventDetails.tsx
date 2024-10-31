@@ -1,4 +1,3 @@
-// src/pages/EventDetails.tsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EventDetails } from "../types";
@@ -29,7 +28,7 @@ const EventDetailsPage: React.FC = () => {
     <div>
       <h2>{eventDetails.name}</h2>
       <p>Address: {eventDetails.venue.address}</p>
-      <p>Music Style: {eventDetails.classifications[0].genre}</p>
+      <p>Genre: {eventDetails.classifications[0]?.genre || 'N/A'}</p>
       <p>Price: £{eventDetails.priceRanges?.[0]?.min || 'N/A'}</p>
       <div className="event-gallery">
         {eventDetails.images.map((img, index) => (

@@ -1,24 +1,3 @@
-// src/types.ts
-export interface Event {
-  _id: string;
-  name: string;
-  address: string;
-  musicStyle: string;
-  price: number;
-  location: {
-    lat: number;
-    lon: number;
-  };
-  date: {
-    start: string;
-    end: string;
-  };
-  description: string;
-  ticketLink: string;
-  source: string;
-  thumbnailImage?: string;
-}
-
 export interface EventDetails {
   _id: string;
   name: string;

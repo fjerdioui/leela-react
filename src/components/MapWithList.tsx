@@ -1,8 +1,7 @@
-// src/components/MapWithList.tsx
 import React, { useEffect, useState } from "react";
 import EventMap from "./EventMap";
 import EventList from "./EventList";
-import { Event } from "../types";
+import { EventDetails } from "../types";
 
 interface MapWithListProps {
   selectedEventId: string | null;
@@ -13,7 +12,7 @@ const MapWithList: React.FC<MapWithListProps> = ({
   selectedEventId,
   setSelectedEventId,
 }) => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:4000";

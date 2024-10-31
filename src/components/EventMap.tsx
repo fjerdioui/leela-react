@@ -1,12 +1,11 @@
-// src/components/EventMap.tsx
 import React, { useEffect, useRef } from "react";
 import L from "leaflet";
 import { useNavigate } from "react-router-dom";
-import { Event } from "../types";
+import { EventDetails } from "../types";
 import eventIcon from "../assets/party-icon.png";
 
 interface EventMapProps {
-  events: Event[];
+  events: EventDetails[];
   selectedEventId: string | null;
   onMapClick: (id: string) => void;
 }
@@ -45,9 +44,10 @@ const EventMap: React.FC<EventMapProps> = ({ events, selectedEventId, onMapClick
         popupAnchor: [0, -32],
       });
 
-      events.forEach((event: Event) => {
-        if (event.location?.lat && event.location?.lon) {
-          const marker = L.marker([event.location.lat, event.location.lon], { icon: customIcon });
+      events.forEach((event: EventDetails) => {
+        const { location } = event.venue;
+        if (location?.latitude && location?.longitude) {
+          const marker = L.marker([parseFloat(location.latitude), parseFloat(location.longitude)], { icon: customIcon });
           marker.addTo(markerLayerRef.current as L.LayerGroup);
           markerRefs.current[event._id] = marker;
 
@@ -59,11 +59,10 @@ const EventMap: React.FC<EventMapProps> = ({ events, selectedEventId, onMapClick
           marker.bindPopup(`
            <div>
                 <h3 class="popup-title" data-id="${event._id}">${event.name}</h3>
-                <img src="${event.thumbnailImage}" alt="${event.name}" style="width:100%; height:auto; margin-bottom:5px;"/>
-                <p><strong>Address:</strong> ${event.address}</p>
-                <p><strong>Music Style:</strong> ${event.musicStyle}</p>
-                <p><strong>Price:</strong> £${event.price}</p>
-                <p><strong>Dates:</strong> ${new Date(event.date.start).toLocaleString()} - ${new Date(event.date.end).toLocaleString()}</p>
+                <img src="${event.images[0]?.url || ''}" alt="${event.name}" style="width:100%; height:auto; margin-bottom:5px;"/>
+                <p><strong>Address:</strong> ${event.venue.address}</p>
+                <p><strong>Genre:</strong> ${event.classifications[0]?.genre || ''}</p>
+                <p><strong>Price:</strong> £${event.priceRanges[0]?.min || 'N/A'}</p>
            </div>
           `);
         }
@@ -74,8 +73,9 @@ const EventMap: React.FC<EventMapProps> = ({ events, selectedEventId, onMapClick
   useEffect(() => {
     if (selectedEventId && leafletMapRef.current) {
       const selectedEvent = events.find(event => event._id === selectedEventId);
-      if (selectedEvent && selectedEvent.location?.lat && selectedEvent.location?.lon) {
-        leafletMapRef.current.setView([selectedEvent.location.lat, selectedEvent.location.lon], 13);
+      const { latitude, longitude } = selectedEvent?.venue.location || {};
+      if (latitude && longitude) {
+        leafletMapRef.current.setView([parseFloat(latitude), parseFloat(longitude)], 13);
         const selectedMarker = markerRefs.current[selectedEventId];
         selectedMarker?.openPopup();
       }

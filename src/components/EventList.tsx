@@ -1,9 +1,8 @@
-// src/components/EventList.tsx
 import React, { useEffect, useRef } from "react";
-import { Event } from "../types";
+import { EventDetails } from "../types";
 
 interface EventListProps {
-  events: Event[];
+  events: EventDetails[];
   selectedEventId: string | null;
   onEventSelect: (id: string) => void;
   onNameClick: (id: string) => void;
@@ -23,7 +22,7 @@ const EventList: React.FC<EventListProps> = ({ events, selectedEventId, onEventS
 
   return (
     <ul className="event-list">
-      {events.map((event: Event) => (
+      {events.map((event: EventDetails) => (
         <li
           key={event._id}
           ref={(el) => (listItemRefs.current[event._id] = el)}
@@ -42,10 +41,7 @@ const EventList: React.FC<EventListProps> = ({ events, selectedEventId, onEventS
               {event.name}
             </h3>
             <p className="event-item-info">
-              {event.musicStyle} - £{event.price}
-            </p>
-            <p className="event-item-date">
-              {event.date.start.toLocaleString()} - {event.date.end.toLocaleString()}
+              {event.classifications[0]?.genre || 'N/A'} - £{event.priceRanges?.[0]?.min || 'N/A'}
             </p>
             <p className="event-item-description">{event.description}</p>
             <a href={event.ticketLink} target="_blank" rel="noopener noreferrer" className="event-item-link">
