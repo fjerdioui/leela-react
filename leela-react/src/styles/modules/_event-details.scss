@@ -1,0 +1,19 @@
+// src/styles/modules/event-details.scss
+
+.event-details {
+    padding: 20px;
+}
+
+/* src/styles/modules/_eventDetails.scss */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.gallery img {
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
